@@ -5,4 +5,4 @@ register = template.Library()
 
 @register.simple_tag()
 def tag_categories():
-    return Categories.objects.fall()
+    return Categories.objects.all()
