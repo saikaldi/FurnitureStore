@@ -3,13 +3,14 @@ from django.core.paginator import  Paginator
 from .models import Products
 # Create your views here.
 
-def catalog(request, category_slug, page=1):
+def catalog(request, category_slug ):
+    page = request.GET.get('page', 1)
     if category_slug == "all-products":
         goods = Products.objects.all()
     else:
         goods = get_list_or_404(Products.objects.filter(category__slug=category_slug))
     paginator = Paginator(goods, 3)
-    current_page = paginator.page(page)
+    current_page = paginator.page(int(page))
     context = {
         "title": "Home - Catalog",
         "goods": current_page,
