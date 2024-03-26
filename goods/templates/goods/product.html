@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% block content %}
 <div class="container mt-5">
@@ -20,19 +20,19 @@
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="imageModal1Label">{{ product.name }}</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Закрыть"></button>
+                                                    aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <img src="{{product.image.url}}"
-                                                    class="img-fluid" alt="Изображение 1">
+                                                    class="img-fluid" alt="Picture 1">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Описание товара -->
+                            <!-- Description of the product -->
                             <div class="card-body">
-                                <p class="card-text">Цена: <strong>{{ product.sell_price }} $</strong></p>
+                                <p class="card-text">Cost: <strong>{{ product.sell_price }} $</strong></p>
                                 <h5 class="card-title">{{ product.name }}</h5>
                                 <p class="card-text">{{ product.description}}</p>
                                 <a href="#" class="btn btn-dark add-to-cart">Add to cart</a>
