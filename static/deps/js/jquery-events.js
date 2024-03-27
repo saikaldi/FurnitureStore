@@ -1,8 +1,8 @@
-// Когда html документ готов (прорисован)
+// When html doc is ready
 $(document).ready(function () {
-    // Берем из разметки элемент по id - оповещения от django
+    // Take an element from layout by id - notification form django
     var notification = $('#notification');
-    // И через 7 сек. убираем
+    // After 7s remove
     if (notification.length > 0) {
         setTimeout(function () {
             notification.alert('close');

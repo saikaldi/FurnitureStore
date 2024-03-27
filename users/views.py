@@ -1,7 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
-from django.contrib import auth
-from .forms import UserLoginForm, UserRegisterForm
+from django.contrib import auth, messages
+from .forms import UserLoginForm, UserRegisterForm, ProfileForm
 # Create your views here.
 
 def login(request):
@@ -13,6 +14,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
+                messages.success(request, f'{username}, You successfully logged in')
                 return HttpResponseRedirect(reverse('main:index'))
     else:
         form = UserLoginForm()
@@ -30,7 +32,7 @@ def registration(request):
             form.save()
             user=form.instance
             auth.login(request, user)
-
+            messages.success(request, f'{user. username}, You successfully registered and logged in')
             return HttpResponseRedirect(reverse('main:index'))
     else:
         form = UserRegisterForm()
@@ -40,13 +42,23 @@ def registration(request):
     }
     return render(request, 'users/registration.html', context)
 
+@login_required
 def profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f' Profile successfully updated')
+            return HttpResponseRedirect(reverse('user:profile'))
+    else:
+        form = ProfileForm(instance=request.user)
     context = {
-        'title': 'Home - Profile'
+        'title': 'Home - Profile',
+        'form': form
     }
     return render(request, 'users/profile.html', context)
 
 def logout(request):
+    messages.success(request, f'{request.user.username}, You successfully logged out ')
     auth.logout(request)
-
     return redirect(reverse('main:index'))

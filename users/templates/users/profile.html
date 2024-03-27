@@ -7,39 +7,73 @@
     <div class="row">
                         <div class="container mt-5">
                             <div class="row">
-                                <!-- Профиль с данными пользователя -->
+                                <!-- Profile with user data-->
                                 <div class="col-md-5">
                                     <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
                                         <h3 class="text-center mb-4">Profile</h3>
-                                        <form>
+                                        <form action="{% url "user:profile" %}" method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
                                             <div class="row">
                                                 <div class="col-md-12 mb-3 text-center">
-                                                    <img src="{% static "/deps/images/baseavatar.jpg " %}"
-                                                        alt="Avatar of a user" class="img-fluid rounded-circle"
-                                                        style="max-width: 150px;">
-                                                    <input type="file" class="form-control mt-3" id="avatar"
+                                                    {% if user.image %}
+                                                        <img src="{{ user.image.url }}"
+                                                            alt="Avatar of a user" class="img-fluid rounded-circle"
+                                                            style="max-width: 150px;">
+                                                    {% else %}
+                                                        <img src="{% static "deps/images/baseavatar.jpg" %}"
+                                                            alt="Avatar of a user" class="img-fluid rounded-circle"
+                                                            style="max-width: 150px;">
+                                                    {% endif %}
+                                                    <input type="file" class="form-control mt-3" id="id_image"
+                                                        name="image"
                                                         accept="image/*">
+                                                        {% if form.image.errors %}
+                                                        <div class="alert alert-danger alert-dismissible fade show">{{form.image.errors}}</div>
+                                                        {% endif %}
                                                 </div>
                                                 <div class="col-md-12 mb-3">
-                                                    <label for="firstName" class="form-label">Name*</label>
-                                                    <input type="text" class="form-control" id="firstName"
-                                                        placeholder="Enter your name" value="" required>
-                                                </div>
-                                                <div class="col-md-12 mb-3">
-                                                    <label for="lastName" class="form-label">Surname*</label>
-                                                    <input type="text" class="form-control" id="lastName"
-                                                        placeholder="Enter your surname" value="" required>
-                                                </div>
-                                                <div class="col-md-12 mb-3">
-                                                    <label for="username" class="form-label">Username*</label>
-                                                    <input type="text" class="form-control" id="username"
-                                                        placeholder="Enter your username" value="" required>
-                                                </div>
-                                                <div class="col-md-12 mb-3">
-                                                    <label for="email" class="form-label">Email*</label>
-                                                    <input type="email" class="form-control" id="email"
-                                                        placeholder="Enter your email *youremail@example.com" value=""
+                                                    <label for="id_first_name" class="form-label">Name*</label>
+                                                    <input type="text" class="form-control" id="id_first_name"
+                                                        name = "first_name"
+                                                        placeholder="Enter your name"
+                                                        value="{{ form.first_name.value }}"
                                                         required>
+                                                        {% if form.first_name.errors %}
+                                                        <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                                                        {% endif %}
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="id_last_name" class="form-label">Last name*</label>
+                                                    <input type="text" class="form-control" id="id_last_name"
+                                                        name="last_name"
+                                                        placeholder="Enter your last name"
+                                                        value="{{ form.last_name.value }}"
+                                                        required>
+                                                        {% if form.last_name.errors %}
+                                                        <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
+                                                        {% endif %}
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="id_username" class="form-label">Username*</label>
+                                                    <input type="text" class="form-control" id="id_username"
+                                                        name="username"
+                                                        placeholder="Enter your username"
+                                                        value="{{ form.username.value }}"
+                                                        required>
+                                                        {% if form.username.errors %}
+                                                        <div class="alert alert-danger alert-dismissible fade show">{{form.username.errors}}</div>
+                                                        {% endif %}
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="id_email" class="form-label">Email*</label>
+                                                    <input type="email" class="form-control" id="id_email"
+                                                        name="email"
+                                                        placeholder="Enter your email *youremail@example.com"
+                                                        value="{{ form.email.value }}"
+                                                        required>
+                                                        {% if form.email.errors %}
+                                                        <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+                                                        {% endif %}
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-dark">Save</button>
@@ -51,26 +85,26 @@
                                     <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
                                         <h3 class="text-center mb-4">Cart</h3>
                                         <div class="container" id="cart-items-container">
-                                            <!-- Разметка корзины -->
+                                            <!-- Cart layout-->
 
-                                            <!-- Закончилась разметка корзины -->
+                                            <!-- End Cart layout -->
                                         </div>
                                         <a class="btn btn-dark" href="../orders/create_order.html">
-                                            Оформить заказ
+                                            Order
                                         </a>
                                     </div>
                                 </div>
-                                <!-- Оформленные заказы -->
+                                <!-- Added to cart -->
                                 <div class="col-md-12">
                                     <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
                                         <h3 class="text-center mb-4">My orders</h3>
-                                        <!-- Разметка заказов -->
+                                        <!-- Order Layout -->
                                         <div class="container">
                                             <div class="accordion" id="accordionExample">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="heading1">
                                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                                            Order № 256 - 09 сентября 2023 9:04 | Статус:<strong class="mx-2"> В обработке</strong>
+                                                            Order № 256 - 09 september 2023 9:04 | Status:<strong class="mx-2"> In processing</strong>
                                                         </button>
                                                     </h2>
                                                     <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#accordionExample">
@@ -86,7 +120,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td><a class="text-white" href="#">Комплект стол и три стула</a></td>
+                                                                        <td><a class="text-white" href="#">Set of table and three chairs/a></td>
                                                                         <td>1</td>
                                                                         <td>255.00 $</td>
                                                                         <td>255.00 $</td>
@@ -105,7 +139,7 @@
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="heading2">
                                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                                            Order № 248 - 01 august 2023 11:28 | Status: <strong>Recieved</strong>
+                                                            Order № 248 - 01 august 2023 11:28 | Status: <strong>Received</strong>
                                                         </button>
                                                     </h2>
                                                     <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordionExample">
@@ -121,7 +155,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td><a class="text-white" href="#">Стул офисный</a></td>
+                                                                        <td><a class="text-white" href="#">Office table</a></td>
                                                                         <td>2</td>
                                                                         <td>30.00 $</td>
                                                                         <td>60.00 $</td>
@@ -134,7 +168,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Закончилась разметка заказов -->
+                                        <!-- End Order Layout-->
                                     </div>
                                 </div>
                             </div>
