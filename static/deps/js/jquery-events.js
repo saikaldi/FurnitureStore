@@ -1,8 +1,8 @@
 // When html doc is ready
 $(document).ready(function () {
-    // Take an element from layout by id - notification form django
+    // Берем из разметки элемент по id - оповещения от django
     var notification = $('#notification');
-    // After 7s remove
+    // И через 7 сек. убираем
     if (notification.length > 0) {
         setTimeout(function () {
             notification.alert('close');
@@ -17,12 +17,12 @@ $(document).ready(function () {
     });
 
     // Собыите клик по кнопке закрыть окна корзины
-    $('#exampleModal .btn-close').click(function () {
+    $('#exampleModal  .btn-close').click(function () {
         $('#exampleModal').modal('hide');
     });
 
     // Обработчик события радиокнопки выбора способа доставки
-    $("input[name='requires_delivery']").change(function() {
+    $("input[name='requires_delivery']").change(function () {
         var selectedValue = $(this).val();
         // Скрываем или отображаем input ввода адреса доставки
         if (selectedValue === "1") {
@@ -31,5 +31,6 @@ $(document).ready(function () {
             $("#deliveryAddressField").hide();
         }
     });
+
 
 });
