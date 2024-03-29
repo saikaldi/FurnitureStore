@@ -23,7 +23,7 @@ class UserLoginForm(AuthenticationForm):
     #                                       'placeholder': 'Enter your password'})
     # )
 
-class UserRegisterForm(UserCreationForm):
+class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User

@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import auth, messages
-from .forms import UserLoginForm, UserRegisterForm, ProfileForm
+from .forms import UserLoginForm, UserRegistrationForm, ProfileForm
+from carts.models import Cart
 # Create your views here.
 
 def login(request):
@@ -12,9 +13,14 @@ def login(request):
             username = request.POST['username']
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)
+            session_key = request.session.session_key
+
             if user:
                 auth.login(request, user)
                 messages.success(request, f'{username}, You successfully logged in')
+
+                if session_key:
+                    Cart.objects.filter(session_key=session_key).update(user=user)
 
                 redirect_page = request.POST.get('next', None)
                 if redirect_page and redirect_page != reverse('user:logout'):
@@ -30,20 +36,28 @@ def login(request):
     }
     return render(request, 'users/login.html', context)
 
+
 def registration(request):
     if request.method == 'POST':
-        form = UserRegisterForm(data=request.POST)
+        form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
-            user=form.instance
+
+            session_key = request.session.session_key
+
+            user = form.instance
             auth.login(request, user)
-            messages.success(request, f'{user. username}, You successfully registered and logged in')
+
+            if session_key:
+                Cart.objects.filter(session_key=session_key).update(user=user)
+            messages.success(request, f"{user.username}, Вы успешно зарегистрированы и вошли в аккаунт")
             return HttpResponseRedirect(reverse('main:index'))
     else:
-        form = UserRegisterForm()
+        form = UserRegistrationForm()
+
     context = {
-        'title': 'Home - Registration',
-        'form':form
+        'title': 'Home - Регистрация',
+        'form': form
     }
     return render(request, 'users/registration.html', context)
 
