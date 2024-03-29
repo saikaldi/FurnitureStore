@@ -71,4 +71,3 @@ def logout(request):
     messages.success(request, f'{request.user.username}, You successfully logged out ')
     auth.logout(request)
     return redirect(reverse('main:index'))
-
