@@ -2,29 +2,29 @@
 $(document).ready(function () {
     // Берем из разметки элемент по id - оповещения от django
     var notification = $('#notification');
-    // И через 7 сек. убираем
+    // After 7 sec remove message
     if (notification.length > 0) {
         setTimeout(function () {
             notification.alert('close');
         }, 7000);
     }
 
-    // При клике по значку корзины открываем всплывающее(модальное) окно
+    // Clicking on the cart icon opens a pop-up (modal) window
     $('#modalButton').click(function () {
         $('#exampleModal').appendTo('body');
 
         $('#exampleModal').modal('show');
     });
 
-    // Собыите клик по кнопке закрыть окна корзины
+    // Click on the button to close the cart windows
     $('#exampleModal  .btn-close').click(function () {
         $('#exampleModal').modal('hide');
     });
 
-    // Обработчик события радиокнопки выбора способа доставки
+    // Delivery method selection radio button event handler
     $("input[name='requires_delivery']").change(function () {
         var selectedValue = $(this).val();
-        // Скрываем или отображаем input ввода адреса доставки
+        // Hide or show shipping address inputs
         if (selectedValue === "1") {
             $("#deliveryAddressField").show();
         } else {
