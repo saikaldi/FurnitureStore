@@ -5,18 +5,18 @@
 {% block content %}
 <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
     <div class="container">
-        <h3 class="text-center mb-4">Selected products</h3>
+        <h3 class="text-center mb-4">Selected items</h3>
         <div class="container" id="cart-items-container">
             <!-- Cart Layout -->
             {% user_carts request as carts %}
 
             {% include "carts/includes/included_cart.html" %}
-            <!-- End Cart Layout -->
+            <!-- End Cart layout -->
         </div>
     </div>
-    <!-- Details of order -->
+    <!-- Order details -->
     <div class="container">
-        <h3 class="text-center">Order detail</h3>
+        <h3 class="text-center">Detail of order/h3>
         <div class="card mb-3">
             <div class="card-body">
                 <form action="{% url "orders:create_order" %}" method="post">
@@ -51,12 +51,12 @@
                             {% endif %}
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="delivery" class="form-label">Delivery method: </label>
+                            <label for="delivery" class="form-label">Method of delivery: </label>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="requires_delivery"
                                     id="id_requires_delivery" value="1" checked>
-                                <label class="form-check-label" for="id_requires_delivery">Need delivery
-                                    </label>
+                                <label class="form-check-label" for="id_requires_delivery">Need
+                                    delivery</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="requires_delivery"
@@ -65,7 +65,8 @@
                             </div>
                         </div>
                         <div class="mb-3" id="deliveryAddressField">
-                            <label for="id_delivery_address" class="form-label">Address deliveries*:</label>
+                            <label for="id_delivery_address" class="form-label">Addres for
+                                delivery*:</label>
                             <textarea class="form-control" id="id_delivery_address"
                                 value="{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}"
                                 name="delivery_address" rows="2"></textarea>
@@ -74,16 +75,17 @@
                             {% endif %}
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Method of payment: </label>
+                            <label class="form-label">Payment method: </label>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="payment_on_get"
                                     id="id_payment_on_get" value="0" checked>
-                                <label class="form-check-label" for="id_payment_on_get">Pay with card</label>
+                                <label class="form-check-label" for="id_payment_on_get">Pay with
+                                    card</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="payment_on_get"
                                     id="id_payment_on_get" value="1">
-                                <label class="form-check-label" for="id_payment_on_get">Cash/card
+                                <label class="form-check-label" for="id_payment_on_get">In cahsh/with card
                                     on receipt</label>
                                 {% if form.payment_on_get.errors %}
                                     <div class="alert alert-danger alert-dismissible fade show">{{form.payment_on_get.errors}}</div>
@@ -91,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-dark">Order </button>
+                    <button type="submit" class="btn btn-dark">Order</button>
                 </form>
             </div>
         </div>
