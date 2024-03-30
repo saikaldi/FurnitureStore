@@ -40,7 +40,7 @@ class UserRegistrationForm(UserCreationForm):
     #     widget=forms.TextInput(
     #         attrs={
     #             "class": "form-control",
-    #             "placeholder": "Введите ваше имя",
+    #             "placeholder": "Enter your name",
     #         }
     #     )
     # )
@@ -48,7 +48,7 @@ class UserRegistrationForm(UserCreationForm):
     #     widget=forms.TextInput(
     #         attrs={
     #             "class": "form-control",
-    #             "placeholder": "Введите вашу фамилию",
+    #             "placeholder": "Enter your surname,
     #         }
     #     )
     # )
@@ -56,7 +56,7 @@ class UserRegistrationForm(UserCreationForm):
     #     widget=forms.TextInput(
     #         attrs={
     #             "class": "form-control",
-    #             "placeholder": "Введите ваше имя пользователя",
+    #             "placeholder": "Enter your username",
     #         }
     #     )
     # )
@@ -64,7 +64,7 @@ class UserRegistrationForm(UserCreationForm):
     #     widget=forms.EmailInput(
     #         attrs={
     #             "class": "form-control",
-    #             "placeholder": "Введите ваш email *youremail@example.com",
+    #             "placeholder": "Enter your email *youremail@example.com",
     #         }
     #     )
     # )
@@ -72,7 +72,7 @@ class UserRegistrationForm(UserCreationForm):
     #     widget=forms.PasswordInput(
     #         attrs={
     #             "class": "form-control",
-    #             "placeholder": "Введите ваш пароль",
+    #             "placeholder": "Enter your password",
     #         }
     #     )
     # )
@@ -80,7 +80,7 @@ class UserRegistrationForm(UserCreationForm):
     #     widget=forms.PasswordInput(
     #         attrs={
     #             "class": "form-control",
-    #             "placeholder": "Поддтвердите ваш пароль",
+    #             "placeholder": "Confirm your password",
     #         }
     #     )
     # )
@@ -104,7 +104,7 @@ class ProfileForm(UserChangeForm):
     #     widget=forms.TextInput(
     #         attrs={
     #             "class": "form-control",
-    #             "placeholder": "Введите ваше имя",
+    #             "placeholder": "Enter your name",
     #         }
     #     )
     # )
@@ -112,7 +112,7 @@ class ProfileForm(UserChangeForm):
     #     widget=forms.TextInput(
     #         attrs={
     #             "class": "form-control",
-    #             "placeholder": "Введите вашу фамилию",
+    #             "placeholder": "Enter your surname",
     #         }
     #     )
     # )
@@ -120,7 +120,7 @@ class ProfileForm(UserChangeForm):
     #     widget=forms.TextInput(
     #         attrs={
     #             "class": "form-control",
-    #             "placeholder": "Введите ваше имя пользователя",
+    #             "placeholder": "Enter your username",
     #         }
     #     )
     # )
@@ -128,7 +128,7 @@ class ProfileForm(UserChangeForm):
     #     widget=forms.EmailInput(
     #         attrs={
     #             "class": "form-control",
-    #             "placeholder": "Введите ваш email *youremail@example.com",
+    #             "placeholder": "Enter your email *youremail@example.com",
     #         }
     #     )
     # )
