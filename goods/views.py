@@ -2,10 +2,8 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.core.paginator import  Paginator
 from .models import Products
 from .utils import q_search
+
 # Create your views here.
-
-
-
 
 def catalog(request, category_slug=None ):
     page = request.GET.get('page', 1)

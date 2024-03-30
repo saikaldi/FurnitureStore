@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Prefetch
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import auth, messages
 from .forms import UserLoginForm, UserRegistrationForm, ProfileForm
 from carts.models import Cart
+from orders.models import Order, OrderItem
 # Create your views here.
 
 def login(request):
@@ -50,13 +52,13 @@ def registration(request):
 
             if session_key:
                 Cart.objects.filter(session_key=session_key).update(user=user)
-            messages.success(request, f"{user.username}, Вы успешно зарегистрированы и вошли в аккаунт")
+            messages.success(request, f"{user.username}, You have successfully registered and logged into your account")
             return HttpResponseRedirect(reverse('main:index'))
     else:
         form = UserRegistrationForm()
 
     context = {
-        'title': 'Home - Регистрация',
+        'title': 'Home - Registration',
         'form': form
     }
     return render(request, 'users/registration.html', context)
@@ -71,9 +73,18 @@ def profile(request):
             return HttpResponseRedirect(reverse('user:profile'))
     else:
         form = ProfileForm(instance=request.user)
+
+    orders = Order.objects.filter(user=request.user).prefetch_related(
+        Prefetch(
+            "orderitem_set",
+            queryset=OrderItem.objects.select_related("product"),
+        )
+    ).order_by("-id")
+
     context = {
-        'title': 'Home - Profile',
-        'form': form
+        'title': 'Home - Cabinet',
+        'form': form,
+        'orders': orders,
     }
     return render(request, 'users/profile.html', context)
 
