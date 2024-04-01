@@ -51,7 +51,7 @@ The Online Store Website is a dynamic e-commerce platform powered by Python Djan
 4. Apply migrations:
     python manage.py migrate
 
-5. Run the development server:
+5. Run the development server: python manage.py runserver
 6. Access the website at `http://localhost:8000/`.
 
 ## Contributing
